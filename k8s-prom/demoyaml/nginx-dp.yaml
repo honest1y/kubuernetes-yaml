@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: nginx-deployment
+   labels:
+     app.kubernetes.io/instance: nginx-deployment
+spec:
+   replicas: 1
+   selector:
+     matchLabels:
+       qcloud-app: nginx-deployment
+   template:
+     metadata:
+       labels:
+         qcloud-app: nginx-deployment
+     spec:
+       containers:
+       - image: nginx:1.9.5
+         imagePullPolicy: Always
+         name: nginx
+         resources:
+           requests:
+             cpu: 100m
+           limits:
+             cpu: 500m

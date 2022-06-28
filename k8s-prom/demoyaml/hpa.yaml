@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-custom-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hpa-prom-demo
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Pods
+    pods:
+      metricName: nginx_vts_server_requests_per_second
+      targetAverageValue: 10
