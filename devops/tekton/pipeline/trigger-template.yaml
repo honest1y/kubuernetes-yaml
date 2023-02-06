@@ -1,0 +1,28 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: gitlab-template
+spec:
+  params: # 定义参数，和 TriggerBinding 中的保持一致
+    - name: gitrevision
+    - name: gitrepositoryurl
+  resourcetemplates: # 定义资源模板
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun # 定义 pipeline 模板
+      metadata:
+        generateName: gitlab-run- # TaskRun 名称前缀
+      spec:
+        serviceAccountName: tekton-build-sa
+        pipelineRef:
+          name: pipeline
+        workspaces:
+          - name: go-repo-pvc
+            persistentVolumeClaim:
+              claimName: go-repo-pvc
+        params:
+          - name: git_url
+            value: $(tt.params.gitrepositoryurl)
+          - name: image
+            value: "ccr.ccs.tencentyun.com/mervingz/webhook-demo"
+          - name: image_tag
+            value: "$(tt.params.gitrevision)"

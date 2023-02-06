@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test 
+spec:
+  workspaces:
+    - name: go-repo
+      mountPath: /workspace/repo
+  steps:
+    - name: unit-test
+      workingDir: /workspace/repo
+      image: ccr.ccs.tencentyun.com/tencentyun/golang:1.17
+      env:
+      - name: GOPROXY
+        value: https://goproxy.cn
+      command: ['go'] 
+      args:
+      - "test"
+      - "./..."

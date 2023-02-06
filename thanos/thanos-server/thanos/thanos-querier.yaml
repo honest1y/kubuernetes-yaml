@@ -22,6 +22,7 @@ spec:
             - --log.level=debug
             - --query.replica-label=prometheus_replica
             - --store=dnssrv+prometheus-operated:10901
+            
           ports:
             - name: http
               containerPort: 10902

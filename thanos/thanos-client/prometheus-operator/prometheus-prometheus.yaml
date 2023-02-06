@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
     app.kubernetes.io/version: 2.36.2
-  name: k8s
+  name: k8s-new
   namespace: monitoring
 spec:
   alerting:
