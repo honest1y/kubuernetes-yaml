@@ -46,8 +46,3 @@ spec:
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   version: 2.36.2
-  thanos:
-    image: thanosio/thanos:v0.18.0
-    objectStorageConfig:
-      key: objectstorage.yaml
-      name: thanos-objectstorage
